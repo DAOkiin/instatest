@@ -21,4 +21,8 @@ module PagesHelper
     Instagram.authorize_url(redirect_uri: ENV.fetch('CALLBACK_URL'),
                             scope: scope)
   end
+
+  def days_ago(timestamp)
+    (Date.today - Date.strptime(timestamp, '%s')).to_i
+  end
 end

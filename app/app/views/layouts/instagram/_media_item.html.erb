@@ -3,7 +3,8 @@
   <div class="media-body">
     <p><%= link_to 'Open in Instagram', data['link'] %></p>
     <p>likes count: <%= data['likes']['count'] %></p>
-    <p><%="location: #{data['location']['name']}" if !data['location'].nil? %></p>
+    <p><%="location: #{data['location']['name']}" if data['location'] %></p>
+    <p><%="Days ago: #{days_ago(data['caption']['created_time'])}" if data['caption'] %></p>
   </div>
 </li>
 <br>

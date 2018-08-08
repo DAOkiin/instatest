@@ -31,10 +31,6 @@ class IgService
 
   private
 
-  def days_ago(timestamp)
-    (Date.now - Date.strptime(timestamp, '%s')).to_i
-  end
-
   def generate_sig(endpoint, params, secret)
     sig = endpoint
     params.sort.map do |key, val|
