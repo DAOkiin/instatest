@@ -7,13 +7,5 @@
 
 <div class="col-sm">
   <%= render user_views_helper %>
-  <%= bootstrap_form_tag url: root_path do |f| %>
-    <%= f.text_field :location_name,
-                     value: 'Москва, ул.Покровка 18/18',
-                     label: 'List of actual tags' %>
-    <%= f.submit 'Search tags' %>
-  <% end %>
-  <div id="tags">
-
   </div>
 </div>
