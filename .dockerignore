@@ -1,0 +1,6 @@
+.git
+.dockerignore
+
+./app/.byebug_history
+./app/log/*
+./app/tmp/*

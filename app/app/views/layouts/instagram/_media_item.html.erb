@@ -1,0 +1,9 @@
+<li class="media">
+  <img class="mr-3" src="<%= data['images']['thumbnail']['url'] %>">
+  <div class="media-body">
+    <p><%= link_to 'Open in Instagram', data['link'] %></p>
+    <p>likes count: <%= data['likes']['count'] %></p>
+    <p><%="location: #{data['location']['name']}" if !data['location'].nil? %></p>
+  </div>
+</li>
+<br>

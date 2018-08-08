@@ -1,0 +1,12 @@
+<div class="media">
+  <img class="mr-3" src="<%= @user_data['profile_picture'] %>">
+  <div class="media-body">
+    <h4 class="mt-1"><%= @user_data['full_name'] %></h4>
+    <p> About me: <%= @user_data['bio'] %> </p>
+    <p> Website: <%= @user_data['website'] %> </p>
+    <p> Total media: <%= @user_data['counts']['media'] %> </p>
+    <p> Total follows: <%= @user_data['counts']['follows'] %> </p>
+    <p> Total followings: <%= @user_data['counts']['followed_by'] %> </p>
+  </div>
+</div>
+<%= render 'layouts/instagram/recent_media' %>

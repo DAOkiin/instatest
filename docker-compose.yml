@@ -1,0 +1,78 @@
+version: '2'
+
+services:
+  postgres:
+    image: 'postgres:10.3-alpine'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+    env_file:
+      - '.env'
+
+  redis:
+    image: 'redis:4.0-alpine'
+    command: redis-server
+    volumes:
+      - 'redis:/data'
+
+  app:
+    ports:
+      - '3001:3000'
+      # - '28080:28080'
+      # - '35730:35729'
+    env_file:
+      - '.env'
+    command: rails s
+    stdin_open: true
+    tty: true
+    depends_on: ['postgres', 'redis']
+    volumes:
+      - ./app:/app
+      - gems_alpine:/usr/local/bundle
+    build:
+      context: .
+      dockerfile: rails.dockerfile
+    environment:
+      - VIRTUAL_HOST=instatest.nfreeman.pw
+      - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=instatest.nfreeman.pw
+      - LETSENCRYPT_EMAIL=nickfreemn@gmail.com
+      - PAGER='busybox less'
+
+  rspec:
+    env_file: '.env'
+    command: bash
+    tty: true
+    stdin_open: true
+    depends_on: ['postgres', 'redis']
+    volumes:
+      - ./app:/app
+      - gems_ubuntu:/usr/local/bundle
+    build:
+      context: .
+      dockerfile: rspec.dockerfile
+    environment:
+      - PAGER='busybox less'
+    working_dir: /app
+
+  ungit:
+    command: ungit --no-launchBrowser --forcedLaunchPath=/var/www
+    build:
+      context: .
+      dockerfile: ungit.dockerfile
+    ports: ["8450:8448"]
+    volumes:
+      - .:/var/www/
+      - /etc/ssh/ssh_config:/etc/ssh/ssh_config
+      - /home/nickf/.ssh:/home/node/.ssh
+
+volumes:
+  redis:
+  postgres:
+  gems_alpine:
+  gems_ubuntu:
+  rspec:
+
+networks:
+  default:
+    external:
+      name: webproxy

@@ -1,0 +1,5 @@
+main_scraper:               # a unique name for this schedule
+  class: ScraperScheduleJob # the job class
+  cron: "*/5 * * * *"       # cron formatted schedule
+  queue: "schedule"         # Sidekiq queue for job
+  # args: [42]              # (optional) set of arguments

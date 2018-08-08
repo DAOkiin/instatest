@@ -1,0 +1,6 @@
+<h3>Top 4 popular image</h3>
+<ul class="list-unstyled">
+  <%= render partial: 'layouts/instagram/media_item',
+             collection: @recent_media,
+             as: :data %>
+</ul>
